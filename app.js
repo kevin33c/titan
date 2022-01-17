@@ -41,13 +41,13 @@ app.use(express.urlencoded({
 app.use(compression());
 
 //========================================
-// set static folder (angular)
+// set static folder (react)
 //========================================
 app.use(express.static('client/build'));
 
 
 //========================================
-// get Dist (angular)
+// get build (react)
 //========================================
 require('./server/routes')(app);
 app.get('*', (req, res) => {
