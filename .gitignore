@@ -3,3 +3,4 @@ config_dev.js
 npm-debug.log
 .DS_Store
 /*.env
+notes.txt

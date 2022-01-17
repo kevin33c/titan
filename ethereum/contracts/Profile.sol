@@ -37,6 +37,7 @@ contract Profiles {
         string memory _surname,
         uint256 _dob
     ) {
+        //ask for small donation?
         ownerProfile = Profile({
             account: msg.sender,
             name: _name,

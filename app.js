@@ -2,7 +2,7 @@ const compression = require('compression')
 const express = require('express');
 const path = require('path');
 const http = require('http');
-const config = require('./config/configs');
+const config = require('./config/config');
 
 // Set up the express app
 const app = express();
