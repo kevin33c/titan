@@ -20,13 +20,9 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       primaryKey: true
     },    
-    type: {
+    address: {
       type: DataTypes.STRING,
       allowNull: false,
-    },
-    name: {
-      type: DataTypes.STRING,
-      allowNull: false
     },
   }, {
     sequelize,

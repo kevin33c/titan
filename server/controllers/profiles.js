@@ -5,8 +5,7 @@ module.exports = {
     create(req, res) {
         return profiles
             .create({
-                type: req.body.type,
-                name: req.body.name,
+                address: req.body.address
             })
             .then(profile => res.status(201).send(profile))
             .catch(error => res.status(400).send(error));
