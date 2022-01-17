@@ -1,0 +1,27 @@
+{
+  "name": "titan",
+  "version": "1.0.0",
+  "description": "portable personal data via Ethereum blockchain",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js",
+    "start:test": "nodemon app.js"
+  },
+  "author": "Kevin Chen",
+  "license": "ISC",
+  "dependencies": {
+    "@truffle/hdwallet-provider": "^2.0.0",
+    "axios": "^0.24.0",
+    "compression": "^1.7.4",
+    "express": "^4.17.2",
+    "mysql2": "^2.3.3",
+    "nodemon": "^2.0.15",
+    "sequelize": "^6.13.0",
+    "solc": "^0.8.11",
+    "web3": "^1.7.0"
+  },
+  "engines": {
+    "node": "16.13.1"
+  }
+}
