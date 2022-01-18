@@ -3,11 +3,17 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
+import { ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 ReactDOM.render(
-  <BrowserRouter>
-    <App />
-  </BrowserRouter>,
+  <>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+    <ToastContainer />
+  </>
+  ,
   document.getElementById('root')
 );
 

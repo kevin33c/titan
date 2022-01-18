@@ -4,7 +4,7 @@ import Container from '@mui/material/Container';
 
 function Copyright() {
   return (
-    <Typography variant="body2" color="text.secondary">
+    <Typography variant="body2" color="white">
       {'Copyright © '}
       {new Date().getFullYear()}
       {'.'}
@@ -20,15 +20,12 @@ function Footer() {
         py: 3,
         px: 2,
         mt: 'auto',
-        backgroundColor: (theme) =>
-          theme.palette.mode === 'light'
-            ? theme.palette.grey[200]
-            : theme.palette.grey[800],
+        bgcolor: '#2D3843'
       }}
     >
       <Container maxWidth="sm">
         <Typography variant="body1">
-          Sticky footer placeholder.
+          Footer placeholder.
         </Typography>
         <Copyright />
       </Container>
