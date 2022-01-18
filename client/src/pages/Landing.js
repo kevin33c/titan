@@ -8,6 +8,7 @@ import {
   , CardContent
   , CardActions
   , Button
+  , CardMedia
 } from '@mui/material';
 import { Link } from "react-router-dom";
 
@@ -29,11 +30,17 @@ function Landing() {
         }}
       >
         <CssBaseline />
-        <Container component="main" sx={{ mt: '10%', mb: 2 }} maxWidth="sm">
+        <Container component="main" sx={{ mt: '10%', mb: 5 }}>
           <Box sx={{ width: '100%' }}>
             <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
-              <Grid item xs={6}>
+              <Grid item xs={4}>
                 <Card sx={{ minWidth: 275 }}>
+                  <CardMedia
+                    component="img"
+                    height="100"
+                    image="/static/images/cards/create-profile.jpg"
+                    alt="create profile"
+                  />
                   <CardContent>
                     <Typography variant="h5" component="div">
                       Create Profile
@@ -49,8 +56,14 @@ function Landing() {
                   </CardActions>
                 </Card>
               </Grid>
-              <Grid item xs={6}>
+              <Grid item xs={4}>
                 <Card sx={{ minWidth: 275 }}>
+                  <CardMedia
+                    component="img"
+                    height="100"
+                    image="/static/images/cards/request-access.jpg"
+                    alt="request access"
+                  />
                   <CardContent>
                     <Typography variant="h5" component="div">
                       Request Access
@@ -64,8 +77,14 @@ function Landing() {
                   </CardActions>
                 </Card>
               </Grid>
-              <Grid item xs={6}>
+              <Grid item xs={4}>
                 <Card sx={{ minWidth: 275 }}>
+                  <CardMedia
+                    component="img"
+                    height="100"
+                    image="/static/images/cards/accept-request.jpg"
+                    alt="accept request"
+                  />
                   <CardContent>
                     <Typography variant="h5" component="div">
                       Accept Request
@@ -79,8 +98,35 @@ function Landing() {
                   </CardActions>
                 </Card>
               </Grid>
-              <Grid item xs={6}>
+              <Grid item xs={4}>
                 <Card sx={{ minWidth: 275 }}>
+                  <CardMedia
+                    component="img"
+                    height="100"
+                    image="/static/images/cards/access-profile.jpg"
+                    alt="access profile"
+                  />
+                  <CardContent>
+                    <Typography variant="h5" component="div">
+                      Access Profile
+                    </Typography>
+                    <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                      Access approved profile data.
+                    </Typography>
+                  </CardContent>
+                  <CardActions>
+                    <Button size="small">Access</Button>
+                  </CardActions>
+                </Card>
+              </Grid>
+              <Grid item xs={4}>
+                <Card sx={{ minWidth: 275 }}>
+                  <CardMedia
+                    component="img"
+                    height="100"
+                    image="/static/images/cards/identity.jpg"
+                    alt="identity"
+                  />
                   <CardContent>
                     <Typography variant="h5" component="div">
                       Identify
