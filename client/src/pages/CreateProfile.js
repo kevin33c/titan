@@ -1,25 +1,52 @@
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
-import TextField from '@mui/material/TextField';
-import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
+import { useState } from 'react';
+import { useNavigate } from "react-router-dom";
+
+//mui
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import Container from '@mui/material/Container';
+import LoadingButton from '@mui/lab/LoadingButton';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import SendIcon from '@mui/icons-material/Send';
+import {
+  Avatar
+  , CssBaseline
+  , TextField
+  , Grid
+  , Box
+  , Container
+} from '@mui/material';
+
+//services
+import { Web3Service } from '../services/web3.service';
 
 const theme = createTheme();
+const web3Service = new Web3Service();
+
 
 function CreateProfile() {
-  const handleSubmit = (event) => {
+
+  const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
+
+  const handleSubmit = async (event) => {
+    setLoading(true);
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    // eslint-disable-next-line no-console
-    console.log({
+
+    var profileData = {
       firstName: data.get('firstName'),
       lastName: data.get('lastName'),
       email: data.get('email'),
-    });
+    }
+
+    try {
+      await web3Service.deploy(profileData);
+      navigate('/');
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
+
   };
 
   return (
@@ -71,14 +98,17 @@ function CreateProfile() {
                 />
               </Grid>
             </Grid>
-            <Button
+            <LoadingButton
               type="submit"
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
+              loading={loading}
+              loadingPosition="start"
+              startIcon={<SendIcon />}
             >
               Create Profile
-            </Button>
+            </LoadingButton>
           </Box>
         </Box>
       </Container>

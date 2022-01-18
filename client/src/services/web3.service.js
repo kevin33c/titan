@@ -59,10 +59,10 @@ export class Web3Service extends Component {
             const accounts = await web3.eth.getAccounts();
             //propmt metamask to deploy contract
             const result = await new web3.eth.Contract(JSON.parse(contract.abi))
-                .deploy({ data: contract.bytecode, arguments: ['Ceres Test'] })
+                .deploy({ data: contract.bytecode, arguments: [data.firstName, data.lastName, data.email] })
                 .send({ from: accounts[0], gas: '10000000' });
 
-            //persist game data in db
+            //persist profile contract address data in db
             var payload = {
                 address: result.options.address
             }
@@ -72,7 +72,7 @@ export class Web3Service extends Component {
             return res;
         } catch (error) {
             if (error.code === 4001) {
-                alert.error('You need to accept the transaction in order to create a game.');
+                alert.error('You need to accept the transaction in order to create a profile');
                 return;
             }
             alert.error('Unexpected error ocurred: ' + error);
