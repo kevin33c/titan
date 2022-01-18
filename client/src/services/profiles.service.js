@@ -1,13 +1,13 @@
-import { AlertsService } from './alerts.services';
+import { AlertsService } from './alerts.service';
 
 const axios = require('axios');
 const config = require('../config/config');
 const alert = new AlertsService();
 
-export class ContractsServices {
-    async getContract() {
+export class ProfilesService {
+    async createProfile() {
         try {
-            const res = await axios.get(`${config.domain}api/contracts`);
+            const res = await axios.post(`${config.domain}/api/profiles`);
             return res.data;
         } catch (err) {
             alert.error(err);

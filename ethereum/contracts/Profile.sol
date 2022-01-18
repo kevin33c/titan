@@ -4,7 +4,7 @@ pragma solidity >=0.8.7;
 /*
  * Author: Kevin Chen
  * Created date: 17.01.2022
- * Last updated: 17.01.2022 22:47
+ * Last updated: 18.01.2022 22:11
  * Description: standard smart contract for personal profile and verification of ownership
  */
 
@@ -13,7 +13,7 @@ contract Profiles {
         address account;
         string name;
         string surname;
-        uint256 dob;
+        string email;
     }
 
     struct AccessRequest {
@@ -35,14 +35,14 @@ contract Profiles {
     constructor(
         string memory _name,
         string memory _surname,
-        uint256 _dob
+        string memory _email
     ) {
         //ask for small donation?
         ownerProfile = Profile({
             account: msg.sender,
             name: _name,
             surname: _surname,
-            dob: _dob
+            email: _email
         });
     }
 

@@ -24,8 +24,8 @@ function Footer() {
       }}
     >
       <Container maxWidth="sm">
-        <Typography variant="body1">
-          Footer placeholder.
+        <Typography variant="body1" sx={{ fontStyle: 'italic' }}>
+          Project Titan - Smart Contract based identification
         </Typography>
         <Copyright />
       </Container>
