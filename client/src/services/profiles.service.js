@@ -13,4 +13,13 @@ export class ProfilesService {
             alert.error(err);
         }
     }
+
+    async getProfiles(data) {
+        try {
+            const res = await axios.get(`${config.domain}/api/profiles`);
+            return res.data;
+        } catch (err) {
+            alert.error(err);
+        }
+    }
 }

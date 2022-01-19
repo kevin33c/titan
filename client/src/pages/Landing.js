@@ -73,7 +73,9 @@ function Landing() {
                     </Typography>
                   </CardContent>
                   <CardActions>
-                    <Button size="small">Request</Button>
+                    <Link to="/addresses" style={{ textDecoration: 'none' }}>
+                      <Button size="small">Request</Button>
+                    </Link>
                   </CardActions>
                 </Card>
               </Grid>

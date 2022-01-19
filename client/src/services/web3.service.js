@@ -5,11 +5,13 @@ import Web3 from "web3";
 import { AlertsService } from './alerts.service';
 import { ContractsService } from './contracts.service';
 import { ProfilesService } from './profiles.service';
+import { RequestsService } from './requests.service';
 
 let web3;
 const alert = new AlertsService();
 const contracts = new ContractsService();
 const profiles = new ProfilesService();
+const requests = new RequestsService();
 
 export class Web3Service extends Component {
 
@@ -101,6 +103,41 @@ export class Web3Service extends Component {
                     alert.error('Only the owner of the contract can login');
                 });
             alert.success('🦄  You logged in successfully!');
+        } catch (error) {
+            alert.error(error);
+        }
+    }
+
+    async requestAccess(data) {
+        try {
+            //get contract abi & byte code to deploy
+            const contract = await contracts.getContract();
+            //get user accounts
+            const accounts = await web3.eth.getAccounts();
+            console.log(accounts[0])
+            //create contract instance
+            const contractInstance = new web3.eth.Contract(JSON.parse(contract.abi), data.address);
+            console.log(contractInstance)
+            //call join game function in eth contract
+            await contractInstance.methods
+                .requestAccess(web3.utils.toWei(data.amount, 'ether'), data.message) //data.amount.toString(), data.message
+                .send({ from: accounts[0], gas: '10000000' })
+                .on('receipt', (receipt) => {
+                    console.log("ON receipt:", receipt);
+                })
+                .on('error', (err) => {
+                    alert.error(err);
+                });
+            //persist request data in db
+            var payload = {
+                request_address: accounts[0],
+                address: data.address,
+                amount: data.amount,
+                message: data.message
+            }
+            const res = await requests.createRequest(payload);
+            alert.success('🦄  Access requested!');
+            return res;
         } catch (error) {
             alert.error(error);
         }
