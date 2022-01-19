@@ -1,5 +1,7 @@
 import { Component } from "react";
 import Web3 from "web3";
+
+//services
 import { AlertsService } from './alerts.service';
 import { ContractsService } from './contracts.service';
 import { ProfilesService } from './profiles.service';
@@ -78,5 +80,30 @@ export class Web3Service extends Component {
             alert.error('Unexpected error ocurred: ' + error);
         }
     };
+
+
+    async verify(address) {
+        try {
+            //get contract abi & byte code to deploy
+            const contract = await contracts.getContract();
+            //get user accounts
+            const accounts = await web3.eth.getAccounts();
+            //create contract instance
+            const contractInstance = new web3.eth.Contract(JSON.parse(contract.abi), address);
+            //call join game function in eth contract
+            await contractInstance.methods
+                .verifyOwnership()
+                .send({ from: accounts[0], gas: '10000000' })
+                .on('receipt', (receipt) => {
+                    console.log("ON receipt:", receipt);
+                })
+                .on('error', (err) => {
+                    alert.error('Only the owner of the contract can login');
+                });
+            alert.success('🦄  You logged in successfully!');
+        } catch (error) {
+            alert.error(error);
+        }
+    }
 
 }

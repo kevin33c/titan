@@ -136,7 +136,9 @@ function Landing() {
                     </Typography>
                   </CardContent>
                   <CardActions>
-                    <Button size="small">Login</Button>
+                    <Link to="/login" style={{ textDecoration: 'none' }}>
+                      <Button size="small">Login</Button>
+                    </Link>
                   </CardActions>
                 </Card>
               </Grid>
