@@ -92,7 +92,7 @@ export class Web3Service extends Component {
             const accounts = await web3.eth.getAccounts();
             //create contract instance
             const contractInstance = new web3.eth.Contract(JSON.parse(contract.abi), address);
-            //call join game function in eth contract
+            //call verify account
             await contractInstance.methods
                 .verifyOwnership()
                 .send({ from: accounts[0], gas: '10000000' })
@@ -114,13 +114,11 @@ export class Web3Service extends Component {
             const contract = await contracts.getContract();
             //get user accounts
             const accounts = await web3.eth.getAccounts();
-            console.log(accounts[0])
             //create contract instance
             const contractInstance = new web3.eth.Contract(JSON.parse(contract.abi), data.address);
-            console.log(contractInstance)
-            //call join game function in eth contract
+            //call access request for a profile contract
             await contractInstance.methods
-                .requestAccess(web3.utils.toWei(data.amount, 'ether'), data.message) //data.amount.toString(), data.message
+                .requestAccess(web3.utils.toWei(data.amount, 'ether'), data.message)
                 .send({ from: accounts[0], gas: '10000000' })
                 .on('receipt', (receipt) => {
                     console.log("ON receipt:", receipt);
@@ -130,13 +128,40 @@ export class Web3Service extends Component {
                 });
             //persist request data in db
             var payload = {
-                request_address: accounts[0],
-                address: data.address,
+                requester_address: accounts[0],
+                profile_address: data.address,
                 amount: data.amount,
                 message: data.message
             }
             const res = await requests.createRequest(payload);
             alert.success('🦄  Access requested!');
+            return res;
+        } catch (error) {
+            alert.error(error);
+        }
+    }
+
+    async acceptRequest(data) {
+        try {
+            //get contract abi & byte code to deploy
+            const contract = await contracts.getContract();
+            //get user accounts
+            const accounts = await web3.eth.getAccounts();
+            //create contract instance
+            const contractInstance = new web3.eth.Contract(JSON.parse(contract.abi), data.address);
+            //accept a request from an address
+            await contractInstance.methods
+                .approveAccess(data.requester_address)
+                .send({ from: accounts[0], gas: '10000000' })
+                .on('receipt', (receipt) => {
+                    console.log("ON receipt:", receipt);
+                })
+                .on('error', (err) => {
+                    alert.error('Only the owner of the profile can accept the request.');
+                });
+            //persist request data in db
+            const res = await requests.acceptRequestById(data.id);
+            alert.success('🦄  Request accepted!');
             return res;
         } catch (error) {
             alert.error(error);

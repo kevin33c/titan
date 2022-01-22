@@ -3,7 +3,8 @@ import { useRoutes } from "react-router-dom";
 import Landing from './pages/Landing';
 import CreateProfile from './pages/CreateProfile';
 import Login from './pages/Login';
-import AddressList from './pages/AddressList';
+import RequestAccess from './pages/RequestAccess';
+import AcceptRequests from './pages/AcceptRequests';
 
 // ----------------------------------------------------------------------
 
@@ -12,6 +13,7 @@ export default function Router() {
     { path: '/', element: <Landing /> },
     { path: '/create', element: <CreateProfile /> },
     { path: '/login', element: <Login /> },
-    { path: '/addresses', element: <AddressList /> },
+    { path: '/addresses', element: <RequestAccess /> },
+    { path: '/accept-request', element: <AcceptRequests /> },
   ]);
 }

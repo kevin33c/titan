@@ -44,7 +44,7 @@ const style = {
   p: 4,
 };
 
-function AddressList() {
+function RequestAccess() {
 
   const navigate = useNavigate();
   const [addressesList, setAddressesList] = useState([]);
@@ -102,9 +102,9 @@ function AddressList() {
 
   return (
     <>
-      <TableContainer sx={{ maxWidth: 700, mt: '10%', ml: '20%' }} component={Paper}>
+      <TableContainer sx={{ maxWidth: 1000, mt: '10%', ml: '20%' }} component={Paper}>
         {addressesList?.length > 0 &&
-          <Table aria-label="simple table">
+          <Table size="small">
             <TableHead>
               <TableRow>
                 <TableCell>Address</TableCell>
@@ -115,13 +115,13 @@ function AddressList() {
             <TableBody>
               {addressesList?.map((row) => (
                 <TableRow
-                  key={row?.address}
+                  key={row?.id}
                   sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                 >
                   <TableCell component="th" scope="row">
                     {row?.address}
                   </TableCell>
-                  <TableCell component="th" scope="row">
+                  <TableCell component="th" scope="row" align="center">
                     <Link href={`https://rinkeby.etherscan.io/address/${row?.address}`}
                       target="_blank"
                       rel="noreferrer"
@@ -129,7 +129,7 @@ function AddressList() {
                       <LinkIcon />
                     </Link>
                   </TableCell>
-                  <TableCell component="th" scope="row">
+                  <TableCell component="th" scope="row" align="right">
                     <Button
                       value={row?.address}
                       variant="contained"
@@ -194,7 +194,7 @@ function AddressList() {
               loadingPosition="start"
               startIcon={<SendIcon />}
             >
-              Join Game
+              Request Access
             </LoadingButton>
           </form>
         </Box>
@@ -203,4 +203,4 @@ function AddressList() {
   );
 }
 
-export default AddressList
+export default RequestAccess

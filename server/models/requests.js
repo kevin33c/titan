@@ -20,11 +20,11 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       primaryKey: true
     },    
-    request_address: {
+    requester_address: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    address: {
+    profile_address: {
       type: DataTypes.STRING,
       allowNull: false,
     },
@@ -34,6 +34,11 @@ module.exports = (sequelize, DataTypes) => {
     },
     message: {
       type: DataTypes.STRING,
+      allowNull: false,
+    },
+    is_accepted: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
       allowNull: false,
     },
   }, {

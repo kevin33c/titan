@@ -96,7 +96,9 @@ function Landing() {
                     </Typography>
                   </CardContent>
                   <CardActions>
-                    <Button size="small">Accept</Button>
+                    <Link to="/accept-request" style={{ textDecoration: 'none' }}>
+                      <Button size="small">Accept</Button>
+                    </Link>
                   </CardActions>
                 </Card>
               </Grid>

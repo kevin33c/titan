@@ -12,11 +12,11 @@ module.exports = {
     },
     get(req, res) {
         return profiles
-        .findAll({ 
-            limit: 10,
-            order: [ [ 'createdAt', 'DESC' ]]
-        })
-        .then(profiles => res.status(201).send(profiles))
-        .catch(error => res.status(400).send(error));
+            .findAll({
+                limit: 10,
+                order: [['createdAt', 'DESC']]
+            })
+            .then(profiles => res.status(201).send(profiles))
+            .catch(error => res.status(400).send(error));
     },
 };

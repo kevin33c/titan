@@ -12,5 +12,7 @@ module.exports = (app) => {
   //requests
   app.post('/api/requests', controller.requests.create);
   app.get('/api/requests', controller.requests.get);
+  app.get('/api/requests/:addressId', controller.requests.findRequestByAddress);
+  app.put('/api/requests/accept/:id', controller.requests.acceptRequestById);
 
 };

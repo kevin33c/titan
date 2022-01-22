@@ -15,11 +15,11 @@ module.exports = {
     },
     get(req, res) {
         return contracts
-        .findOne({
-            where: { type: 'main' },
-            order: [ [ 'createdAt', 'DESC' ]],
-        })
-        .then(contracts => res.status(201).send(contracts))
-        .catch(error => res.status(400).send(error));
+            .findOne({
+                where: { type: 'main' },
+                order: [['createdAt', 'DESC']],
+            })
+            .then(contracts => res.status(201).send(contracts))
+            .catch(error => res.status(400).send(error));
     },
 };
