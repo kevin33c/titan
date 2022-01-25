@@ -32,6 +32,8 @@ contract Profiles {
     AccessRequest[] public accessRequests;
     mapping(address => Access) private accessList;
 
+    event returnProfile(Profile profile);
+
     constructor(
         string memory _name,
         string memory _surname,
@@ -60,6 +62,7 @@ contract Profiles {
         Profile memory p;
         p = ownerProfile;
         payable(ownerProfile.account).transfer(msg.value);
+        emit returnProfile(p);
         return p;
     }
 

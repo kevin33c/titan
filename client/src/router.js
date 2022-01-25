@@ -5,6 +5,7 @@ import CreateProfile from './pages/CreateProfile';
 import Login from './pages/Login';
 import RequestAccess from './pages/RequestAccess';
 import AcceptRequests from './pages/AcceptRequests';
+import AccessProfile from './pages/AccessProfile';
 
 // ----------------------------------------------------------------------
 
@@ -15,5 +16,6 @@ export default function Router() {
     { path: '/login', element: <Login /> },
     { path: '/addresses', element: <RequestAccess /> },
     { path: '/accept-request', element: <AcceptRequests /> },
+    { path: '/access', element: <AccessProfile /> },
   ]);
 }

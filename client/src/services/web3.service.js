@@ -81,7 +81,7 @@ export class Web3Service extends Component {
             }
             alert.error('Unexpected error ocurred: ' + error);
         }
-    };
+    }
 
 
     async verify(address) {
@@ -157,12 +157,40 @@ export class Web3Service extends Component {
                     console.log("ON receipt:", receipt);
                 })
                 .on('error', (err) => {
+                    console.log(err);
                     alert.error('Only the owner of the profile can accept the request.');
                 });
             //persist request data in db
             const res = await requests.acceptRequestById(data.id);
             alert.success('🦄  Request accepted!');
             return res;
+        } catch (error) {
+            alert.error(error);
+        }
+    }
+
+    async accessProfile(address) {
+        try {
+            //get contract abi & byte code to deploy
+            const contract = await contracts.getContract();
+            //get user accounts
+            const accounts = await web3.eth.getAccounts();
+            //create contract instance
+            const contractInstance = new web3.eth.Contract(JSON.parse(contract.abi), address);
+            //request a profile from an approved account
+            //web3.utils.toWei(0.01, 'ether')
+            const res = await contractInstance.methods
+                .getProfile()
+                .send({ from: accounts[0], gas: '10000000', value: web3.utils.toWei('0.01', 'ether')})
+                .on('receipt', (receipt) => {
+                    console.log("ON receipt:", receipt);
+                })
+                .on('error', (err) => {
+                    console.log(err);
+                    alert.error('Only approved address can access this profile.');
+                });
+            alert.success('🦄  Profile accessed successfully!');
+            return res.events.returnProfile.returnValues.profile;
         } catch (error) {
             alert.error(error);
         }
