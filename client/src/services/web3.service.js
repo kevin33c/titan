@@ -108,6 +108,7 @@ export class Web3Service extends Component {
         }
     }
 
+
     async requestAccess(data) {
         try {
             //get contract abi & byte code to deploy
@@ -141,6 +142,7 @@ export class Web3Service extends Component {
         }
     }
 
+
     async acceptRequest(data) {
         try {
             //get contract abi & byte code to deploy
@@ -169,6 +171,7 @@ export class Web3Service extends Component {
         }
     }
 
+    
     async accessProfile(address) {
         try {
             //get contract abi & byte code to deploy
@@ -181,7 +184,7 @@ export class Web3Service extends Component {
             //web3.utils.toWei(0.01, 'ether')
             const res = await contractInstance.methods
                 .getProfile()
-                .send({ from: accounts[0], gas: '10000000', value: web3.utils.toWei('0.01', 'ether')})
+                .send({ from: accounts[0], gas: '10000000', value: web3.utils.toWei('0.01', 'ether') })
                 .on('receipt', (receipt) => {
                     console.log("ON receipt:", receipt);
                 })
